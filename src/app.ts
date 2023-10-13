@@ -1,11 +1,10 @@
 import 'dotenv/config';
-import { envs } from './config/plugins';
+import { Server } from './presentation/server';
 
 ( () => {
     main();
 } )();
 
 function main() {
-    // Server.start();
-    console.log( envs );
+    Server.start();
 }
