@@ -1,17 +1,18 @@
-import { FileSystemDatasource, LogRepositoryImpl } from '../infrastructure';
-import { EmailService } from './email/email.service';
-import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs';
+import { LogRepositoryImpl, MongoLogDatasource } from '../infrastructure';
 
-const fileSystemLogRepository = new LogRepositoryImpl( new FileSystemDatasource() );
+const logRepository = new LogRepositoryImpl(
+    // new FileSystemDatasource()
+    new MongoLogDatasource(),
+);
 
 export class Server {
     static start(): void {
         console.log( 'Server started...' );
 
-        new SendEmailLogs(
-            new EmailService(),
-            fileSystemLogRepository,
-        ).execute( 'alva85@gmail.com' );
+        /* new SendEmailLogs(
+             new EmailService(),
+             logRepository,
+         ).execute( 'alva85@gmail.com' );*/
 
         // const emailService = new EmailService();
         /* emailService.sendEmail( {
@@ -29,7 +30,7 @@ export class Server {
             () => {
                 const url = 'https://google.com';
                 new CheckService(
-                    fileSystemLogRepository,
+                    logRepository,
                     () => console.log( `${ url } is OK` ),
                     ( error ) => console.error( error ),
                 ).execute( url );
