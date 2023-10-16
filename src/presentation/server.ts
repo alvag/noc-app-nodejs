@@ -1,8 +1,9 @@
-import { LogRepositoryImpl, MongoLogDatasource } from '../infrastructure';
+import { LogRepositoryImpl, PostgresLogDatasource } from '../infrastructure';
 
 const logRepository = new LogRepositoryImpl(
     // new FileSystemDatasource()
-    new MongoLogDatasource(),
+    // new MongoLogDatasource(),
+    new PostgresLogDatasource(),
 );
 
 export class Server {

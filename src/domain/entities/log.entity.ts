@@ -30,9 +30,8 @@ export class LogEntity {
         return new LogEntity( { message, level, createdAt, origin } );
     }
 
-    static fromObject( json: string = '{}' ): LogEntity {
-        json = json === '' ? '{}' : json;
-        const { message, level, createdAt, origin } = JSON.parse( json );
+    static fromObject( json: { [ key: string ]: any } ): LogEntity {
+        const { message, level, createdAt, origin } = json;
         return new LogEntity( { message, level, createdAt, origin } );
     }
 }
